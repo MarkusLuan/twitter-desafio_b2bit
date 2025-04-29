@@ -5,6 +5,7 @@ dist/
 build/
 db/
 feed_img/
+.pytest_cache/
 
 db.sqlite3
 estrutura.mwb.bak
