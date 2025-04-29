@@ -8,6 +8,7 @@ app.register_blueprint(resources)
 ErrorHandler(app)
 
 if __name__ == "__main__":
+    app.config.from_object("config.dev")
     app.run(
         "0.0.0.0",
         80,

@@ -1,0 +1,7 @@
+BASIC_AUTH_USERNAME = 'api'
+BASIC_AUTH_PASSWORD = '3I28@kl4KY2#'
+
+SECRET_KEY = "ox29V$g3okCp#£xZz5gy8JaVo@OxSZ"
+JWT_SECRET_KEY = f"{SECRET_KEY}.zxczxbjsgb@edadbgbu"
+
+DATABASE =  {}
