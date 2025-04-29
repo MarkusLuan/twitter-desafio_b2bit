@@ -1,0 +1,12 @@
+services:
+    desafio_b2bit_api:
+        build: "."
+        container_name: desafio_b2bit_api
+        ports:
+            - "80:80"
+        networks: 
+            - desafio_b2bit_network
+
+networks: 
+    desafio_b2bit_network:
+        driver: bridge
