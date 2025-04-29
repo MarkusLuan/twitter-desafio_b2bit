@@ -18,7 +18,9 @@ As Views e Models foram separados em vários arquivos nas suas respectivas pasta
 ---
 
 ### Banco de Dados
-Estou avaliando se utilizo o Postgres ou MySQL
+* Postgresql
+* Estrutura desenha no MySQL WorkBench
+![Estrutura do Banco de Dados](./docs/estrutura_db.png)
 
 ---
 
