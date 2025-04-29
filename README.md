@@ -24,6 +24,7 @@ Estou avaliando se utilizo o Postgres ou MySQL
 
 ### Documentações
 - [Documentação Tecnica](./docs/README.md)
+- [Estrutura do Projeto](./docs/estrutura_projeto.md)
 
 ---
 
