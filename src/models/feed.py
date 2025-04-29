@@ -6,7 +6,7 @@ from .abstract_model import AbstractModel
 from app_singleton import db
 
 class Feed (AbstractModel):
-    fields = []
+    fields = ["texto", "count_likes"]
 
     dt_remocao = db.Column(DateTime, nullable=True)
     texto = db.Column(db.String, nullable=False)

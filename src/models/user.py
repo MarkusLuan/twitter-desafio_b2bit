@@ -4,7 +4,7 @@ from .abstract_model import AbstractModel
 from app_singleton import db
 
 class User (AbstractModel):
-    fields = []
+    fields = ["dt_nascimento", "nome", "nick", "bio", "count_seguidores", "count_seguindo"]
 
     dt_nascimento = db.Column(DateTime, nullable=False)
     nome = db.Column(db.String, nullable=False)
