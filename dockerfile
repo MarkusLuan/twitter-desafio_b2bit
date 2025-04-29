@@ -26,6 +26,7 @@ RUN adduser -u 1000 -G www-data -s /bin/sh -D www-data
 WORKDIR /app
 COPY requirements.txt /tmp/requirements.txt
 COPY src .
+COPY src/config/dev.py ./config/prod.py
 COPY site.conf /etc/apache2/sites-available/000-default.conf
 
 # Instalando dependencias
