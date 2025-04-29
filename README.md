@@ -54,3 +54,9 @@ pip install -r requirements.txt
 ```shell
 python app.py
 ```
+4. Para realizar os testes basta executar os seguintes comandos
+```shell
+pip install -r requirements.txt
+pip install pytest
+pytest
+```
