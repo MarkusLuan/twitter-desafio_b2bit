@@ -1,23 +1,39 @@
 # Preparando sistema
-FROM python:3.13-slim
+FROM python:3.13-alpine
 
-RUN apt-get update
-RUN apt-get install -y apache2 apache2-dev
-RUN apt-get install -y apache2-mod-wsgi
+
+# RUN apk add --no-cache \
+#     gcc \
+#     musl-dev \
+#     libffi-dev \
+#     python3-dev \
+#     py3-pip \
+#     build-base \
+#     openssl-dev \
+#     apache2-dev
+
+RUN apk add --no-cache \
+    gcc \
+    musl-dev \
+    libffi-dev \
+    build-base \
+    apache2 \
+    apache2-dev
+
+RUN adduser -u 1000 -G www-data -s /bin/sh -D www-data
 
 # Copiando projeto
 WORKDIR /app
 COPY requirements.txt /tmp/requirements.txt
 COPY src .
 COPY site.conf /etc/apache2/sites-available/000-default.conf
-RUN python3 -m pip install -U pip mod_wsgi
-RUN pip3 install -r /tmp/requirements.txt
-RUN mod_wsgi-express install-module
 
-# Alterando permissões
-RUN chown -R www-data:www-data *
-RUN chmod -R 755 *
+# Instalando dependencias
+RUN python3 -m pip install --break-system-packages -U pip
+RUN pip install --break-system-packages mod_wsgi
+RUN pip install --break-system-packages -r /tmp/requirements.txt
+RUN mod_wsgi-express install-module
 
 # Subindo projeto
 EXPOSE 80
-CMD ["apachectl", "-D", "FOREGROUND"]
+CMD ["mod_wsgi-express", "start-server", "wsgi.py", "--port", "80", "--user", "www-data", "--group", "www-data"]
