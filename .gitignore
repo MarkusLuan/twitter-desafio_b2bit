@@ -4,6 +4,7 @@ logs/
 dist/
 build/
 db/
+feed_img/
 
 db.sqlite3
 estrutura.mwb.bak

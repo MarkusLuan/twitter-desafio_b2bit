@@ -15,6 +15,7 @@ Root/
 │   ├── error_handler.py  => Tratamento de erros do flask
 │   ├── utils.py          => Funções genericas e helpers
 │   └── wsgi.py           => Gateway para servidor de produção
+├── feed_img/             => Pasta onde ficam as imagens das postagens
 ├── docker-compose.yml    => Configuração do Docker-compose
 ├── Dockerfile            => Criação do ambiente Docker
 ├── requirements.txt      => Dependencias do projeto

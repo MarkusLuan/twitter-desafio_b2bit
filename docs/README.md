@@ -13,17 +13,17 @@
 
 ### Casos de uso
 - Caso 1: Cadastro
-    - Os usuários deverão ser capazes de se registrar usando email, nome e senha
-    - A autenticação para login e gerenciamento de sessão deverá ser com JWT
+    - [ ] Os usuários deverão ser capazes de se registrar usando email, nome e senha
+    - [ ] A autenticação para login e gerenciamento de sessão deverá ser com JWT
 - Caso 2: Postagens
-    - Os usuários logados podem postar com texto e uma imagem
-    - As postagens podem ser curtidas por outros usuários
+    - [ ] Os usuários logados podem postar com texto e uma imagem
+    - [ ] As postagens podem ser curtidas por outros usuários
 - Caso 3: Seguidores
-    - Os usuários logados podem Seguir ou Deixar de Seguir outros usuários
-    - O Feed deve mostrar apenas postagens dos usuários que a pessoa segue
+    - [ ] Os usuários logados podem Seguir ou Deixar de Seguir outros usuários
+    - [ ] O Feed deve mostrar apenas postagens dos usuários que a pessoa segue
 - Caso 3: Feed
-    - O usuário pode visualizar uma lista de postagens dos usuários que segue de forma paginada
-    - As postagens devem ser ordernadas pela data de criação, do mais recente ao mais antigo
+    - [ ] O usuário pode visualizar uma lista de postagens dos usuários que segue de forma paginada
+    - [ ] As postagens devem ser ordernadas pela data de criação, do mais recente ao mais antigo
 
 ### Bonus - Provavelmente não consiga concluir a tempo
 - [ ] Criar o Front-end em React.js
