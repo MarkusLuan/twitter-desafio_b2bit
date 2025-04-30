@@ -9,7 +9,7 @@
 - [ ] Paginação
 - [ ] Testes unitários
 - [ ] Documentação com Swagger ou Postman
-- [ ] Docker com o Docker-compose
+- [x] Docker com o Docker-compose
 
 ### Casos de uso
 - Caso 1: Cadastro
