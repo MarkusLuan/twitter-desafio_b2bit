@@ -17,6 +17,6 @@ class Feed (Rest.Resource):
         return jsonify({})
     
     def delete(self, uuid_feed: uuid.UUID):
-        "Endpoint para apagar (por tag) uma postagem"
+        "Endpoint para apagar uma postagem - Remoção lógica"
 
         return jsonify({})
