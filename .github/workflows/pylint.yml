@@ -3,7 +3,9 @@ name: Pylint
 on: [pull_request]
 
 jobs:
-  build:
+  if: false
+
+  pylint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4

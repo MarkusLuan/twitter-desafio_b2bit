@@ -3,7 +3,7 @@ name: Testar
 on: [pull_request]
 
 jobs:
-  build:
+  testando:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
