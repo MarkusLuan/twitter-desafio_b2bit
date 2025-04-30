@@ -1,6 +1,8 @@
-from app import app
+from app import create_app
 
 def test_not_found():
+    app = create_app("config.test")
+
     tester = app.test_client()
     res = tester.get("/blabla")
 
