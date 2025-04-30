@@ -1,0 +1,8 @@
+from flask import Blueprint
+import flask_restful as Rest
+
+from . import routes
+
+resources = Blueprint("feed", __name__, url_prefix="/feed")
+api = Rest.Api(resources)
+api.add_resource(routes.Feed, "/")
