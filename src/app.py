@@ -4,19 +4,28 @@ from resources import resources
 from error_handler import ErrorHandler
 
 def create_app(config: str):
-    app = Flask(__name__)
+    _app = Flask(__name__)
+    _app.config.from_object(config)
 
-    app.config.from_object(config)
-    app.register_blueprint(resources)
-    ErrorHandler(app)
+    if "DATABASE" in _app.config:
+        db_config = _app.config["DATABASE"]
+        db_uri = "{ENGINE}://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
+            **db_config
+        )
+        
+        _app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+        _app.config["SQLALCHEMY_TRACK_NOTIFICATIONS"] = False
 
-    return app
+    _app.register_blueprint(resources)
+    ErrorHandler(_app)
+
+    return _app
 
 if __name__ == "__main__":
     app = create_app("config.dev")
 
     app.run(
         "0.0.0.0",
-        80,
+        8050,
         True
     )
