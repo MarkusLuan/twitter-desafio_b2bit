@@ -5,9 +5,9 @@ def test_not_found():
     res = tester.get("/blabla")
 
     assert res.status_code == 404
-    assert res.is_json == True
+    assert res.is_json is True
     
     j = res.json or {}
 
-    assert j["erro"] == True
+    assert j["erro"] is True
     assert j["texto"] == "Recurso não encontrado!"
