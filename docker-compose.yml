@@ -1,6 +1,22 @@
 services:
+    desafio_b2bit_db:
+        image: postgres:16
+        container_name: desafio_b2bit_db
+        ports:
+            - "5432:5432"
+        environment: 
+            - POSTGRES_DB=desafio_b2bit_db
+            - POSTGRES_USER=desafio_b2bit_db_user
+            - POSTGRES_PASSWORD=6y6Rn@mYZ49
+        volumes:
+            - ./db:/var/lib/postgresql/data
+        networks: 
+            - desafio_b2bit_network
+
     desafio_b2bit_api:
         build: "."
+        depends_on: 
+            - desafio_b2bit_db
         container_name: desafio_b2bit_api
         ports:
             - "80:80"

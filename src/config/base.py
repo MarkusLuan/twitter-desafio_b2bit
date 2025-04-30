@@ -4,4 +4,11 @@ BASIC_AUTH_PASSWORD = 'F8Y#lZsYBN@1#11zjO$a'
 SECRET_KEY = "ox29V$g3okCp#£xZz5gy8JaVo@OxSZ"
 JWT_SECRET_KEY = f"{SECRET_KEY}.zxczxbjsgb@edadbgbu"
 
-DATABASE =  {}
+DATABASE =  {
+    'ENGINE': 'postgresql',
+    'NAME': 'desafio_b2bit_db',
+    'USER': 'desafio_b2bit_db_user',
+    'PASSWORD': '6y6Rn@mYZ49',
+    'HOST': 'localhost',
+    'PORT': '5432'
+}

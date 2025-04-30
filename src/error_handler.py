@@ -26,8 +26,8 @@ class ErrorHandler:
         
         @app.errorhandler(HTTPException)
         def erro_http(e: HTTPException):
-            return __reportar_erro(e.description, e.code)
+            return __reportar_erro(e.description or "", e.code)
 
         @app.errorhandler(Exception)
         def erro_tratado(e: Exception):
-            return __reportar_erro(e, 500)
+            return __reportar_erro(str(e), 500)
