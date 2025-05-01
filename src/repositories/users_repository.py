@@ -38,3 +38,14 @@ class UsersRepository (AbstractRepository):
         
         user.senha = None
         return user
+    
+    def insert(self, _entity: User):
+        user = User.query.filter(or_(
+            User.nick == _entity.nick,
+            User.email == _entity.email
+        )).first()
+
+        if user:
+            raise user_exceptions.UserAlreadyRegisteredException()
+
+        return super().insert(_entity)

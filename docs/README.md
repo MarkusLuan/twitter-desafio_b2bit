@@ -21,7 +21,7 @@
 - Caso 3: Seguidores
     - [ ] Os usuários logados podem Seguir ou Deixar de Seguir outros usuários
     - [ ] O Feed deve mostrar apenas postagens dos usuários que a pessoa segue
-- Caso 3: Feed
+- Caso 4: Feed
     - [ ] O usuário pode visualizar uma lista de postagens dos usuários que segue de forma paginada
     - [ ] As postagens devem ser ordernadas pela data de criação, do mais recente ao mais antigo
 
@@ -31,4 +31,4 @@
 - [ ] Recursos de segurança para evitar SQL Injection e para garantir a Validação dos Dados
 - [ ] Tarefas async com Celery ou outra ferramenta
 - [ ] Sistema de busca
-- [ ] Continuos Integration (Github Actions para testes)
+- [x] Continuos Integration (Github Actions para testes)

@@ -5,10 +5,11 @@ import uuid
 
 from repositories import UsersRepository
 from models import User as UserModel
+import utils
 import app_singleton
 
 class Users (Rest.Resource):
-    repository = UsersRepository()
+    __repository = UsersRepository()
 
     def get(self):
         "Endpoint para pesquisar por usuario"
@@ -24,7 +25,17 @@ class Users (Rest.Resource):
             return abort(400)
         
         j = request.json or {}
-        user = self.repository.insert(UserModel(**j))
+        utils.validar_campos_obrigatorios(j, [
+            "dt_nascimento",
+            "nick",
+            "nome",
+            "email",
+            "bio",
+            "senha",
+        ])
+        utils.remover_campos(j, ["id", "uuid", "dt_criacao"])
+        
+        user = self.__repository.insert(UserModel(**j))
 
         return jsonify(user.json)
 
