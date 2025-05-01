@@ -22,6 +22,18 @@ As Views e Models foram separados em vários arquivos nas suas respectivas pasta
 * Estrutura desenha no MySQL WorkBench
 ![Estrutura do Banco de Dados](./docs/estrutura_db.png)
 
+### Fake-migrate
+* No momento apaga o banco inteiro e sobe de novo
+
+Para iniciar o banco basta ir na pasta [src](./src/) e executar o comando
+```shell
+python3 migrate.py ["config.dev"]
+```
+O ultimo parametro é opcional e são aceitos:
+- "config.dev"
+- "config.prod"
+- "config.test"
+
 ---
 
 ### Documentações
