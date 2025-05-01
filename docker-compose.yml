@@ -5,9 +5,9 @@ services:
         ports:
             - "5432:5432"
         environment: 
-            - POSTGRES_DB=desafio_b2bit_db
-            - POSTGRES_USER=desafio_b2bit_db_user
-            - POSTGRES_PASSWORD=12345678
+            - POSTGRES_DB=b2bit_db
+            - POSTGRES_USER=b2bit_db_user
+            - POSTGRES_PASSWORD=6y6Rn@mYZ49
         volumes:
             - ./db:/var/lib/postgresql/data
         networks: 

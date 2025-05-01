@@ -6,8 +6,8 @@ JWT_SECRET_KEY = f"{SECRET_KEY}.zxczxbjsgb@edadbgbu"
 
 DATABASE =  {
     'ENGINE': 'postgresql',
-    'NAME': 'desafio_b2bit_db',
-    'USER': 'desafio_b2bit_db_user',
+    'NAME': 'b2bit_db',
+    'USER': 'b2bit_db_user',
     'PASSWORD': '6y6Rn@mYZ49',
     'HOST': 'localhost',
     'PORT': '5432'

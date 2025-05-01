@@ -1,17 +1,6 @@
 # Preparando sistema
 FROM python:3.13-alpine
 
-
-# RUN apk add --no-cache \
-#     gcc \
-#     musl-dev \
-#     libffi-dev \
-#     python3-dev \
-#     py3-pip \
-#     build-base \
-#     openssl-dev \
-#     apache2-dev
-
 RUN apk add --no-cache \
     gcc \
     musl-dev \
@@ -34,6 +23,8 @@ RUN python3 -m pip install --break-system-packages -U pip
 RUN pip install --break-system-packages mod_wsgi
 RUN pip install --break-system-packages -r /tmp/requirements.txt
 RUN mod_wsgi-express install-module
+
+RUN python3 migrate.py "config.prod"
 
 # Subindo projeto
 EXPOSE 80
