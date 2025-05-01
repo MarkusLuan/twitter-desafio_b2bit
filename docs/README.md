@@ -3,18 +3,18 @@
 ### Requisitos
 - [x] Python 3
 - [x] Com algum framework Web (Preferencia Django) - Irei utilizar o Flask
-- [ ] Autenticação com JWT
-- [ ] Banco de Dados de preferencia PostgreSQL
-- [ ] Sistema de cache para sistema de likes e seguidores
+- [x] Autenticação com JWT
+- [x] Banco de Dados de preferencia PostgreSQL
+- [x] Sistema de cache para sistema de likes e seguidores
 - [ ] Paginação
-- [ ] Testes unitários
+- [x] Testes unitários
 - [ ] Documentação com Swagger ou Postman
 - [x] Docker com o Docker-compose
 
 ### Casos de uso
 - Caso 1: Cadastro
-    - [ ] Os usuários deverão ser capazes de se registrar usando email, nome e senha
-    - [ ] A autenticação para login e gerenciamento de sessão deverá ser com JWT
+    - [x] Os usuários deverão ser capazes de se registrar usando email, nome e senha
+    - [x] A autenticação para login e gerenciamento de sessão deverá ser com JWT
 - Caso 2: Postagens
     - [ ] Os usuários logados podem postar com texto e uma imagem
     - [ ] As postagens podem ser curtidas por outros usuários
