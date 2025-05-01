@@ -15,3 +15,10 @@ class FeedRepository (AbstractRepository):
             raise feed_exceptions.FeedNotFoundException()
 
         return feed
+    
+    def get_by_user(self, _user_uuid: UUID):
+        feeds = Feed.query.filter(
+            Feed.user.uuid == _user_uuid
+        ).order_by(Feed.dt_criacao).all()
+
+        return feeds

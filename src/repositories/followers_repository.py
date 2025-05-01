@@ -2,6 +2,12 @@ from .abstract_repository import AbstractRepository
 
 from uuid import UUID
 
+from models import Followers
+
 class FollowersRepository (AbstractRepository):
     def get_by_uuid(self, _uuid: UUID):
-        return super().get_by_uuid(_uuid)
+        follower = Followers.query.filter(
+            Followers.uuid == _uuid
+        ).first()
+
+        return follower

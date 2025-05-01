@@ -1,0 +1,4 @@
+from .feed_repository import FeedRepository
+from .followers_repository import FollowersRepository
+from .likes_repository import LikesRepository
+from .users_repository import UsersRepository
