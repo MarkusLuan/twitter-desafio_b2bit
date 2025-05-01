@@ -4,12 +4,12 @@ import flask_restful as Rest
 import uuid
 
 from repositories import UsersRepository
-from models import User
+from models import User as UserModel
 import app_singleton
 
-repository = UsersRepository()
-
 class Users (Rest.Resource):
+    repository = UsersRepository()
+
     def get(self):
         "Endpoint para pesquisar por usuario"
 
@@ -24,7 +24,7 @@ class Users (Rest.Resource):
             return abort(400)
         
         j = request.json or {}
-        user = repository.insert(User(**j))
+        user = self.repository.insert(UserModel(**j))
 
         return jsonify(user.json)
 
