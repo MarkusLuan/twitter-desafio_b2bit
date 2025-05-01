@@ -1,9 +1,36 @@
 services:
+    desafio_b2bit_db:
+        image: postgres:16
+        container_name: desafio_b2bit_db
+        ports:
+            - "5432:5432"
+        environment: 
+            - POSTGRES_DB=b2bit_db
+            - POSTGRES_USER=b2bit_db_user
+            - POSTGRES_PASSWORD=6y6Rn@mYZ49
+        volumes:
+            - ./db:/var/lib/postgresql/data
+        networks: 
+            - desafio_b2bit_network
+
     desafio_b2bit_api:
         build: "."
+        depends_on: 
+            - desafio_b2bit_db
         container_name: desafio_b2bit_api
         ports:
             - "80:80"
+        networks: 
+            - desafio_b2bit_network
+    
+    # TODO: Remover após testes
+    desafio_b2bit_db_admin:
+        image: adminer
+        restart: always
+        depends_on: 
+            - desafio_b2bit_db
+        ports:
+            - 8080:8080
         networks: 
             - desafio_b2bit_network
 
