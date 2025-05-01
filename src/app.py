@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 
 from resources import resources
 from error_handler import ErrorHandler
@@ -30,6 +31,8 @@ def create_app(config: str):
 
     _app.register_blueprint(resources)
     ErrorHandler(_app)
+
+    CORS(_app, origins=_app.config['ALLOWED_ORIGINS'])
 
     return _app
 

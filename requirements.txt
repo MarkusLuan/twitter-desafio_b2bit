@@ -4,6 +4,7 @@ flask-jwt-extended
 Flask-SQLAlchemy
 Flask-BasicAuth
 flask-migrate
+flask-cors
 PyJWT
 psycopg2-binary
 python-dotenv
