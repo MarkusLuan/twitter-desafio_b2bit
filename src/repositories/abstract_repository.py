@@ -11,3 +11,5 @@ class AbstractRepository (ABC):
     def insert(self, _entity):
         app_singleton.db.session.add(_entity)
         app_singleton.db.session.commit()
+
+        return _entity
