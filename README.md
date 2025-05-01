@@ -6,7 +6,7 @@ O projeto irei fazer utilizando o framework Flask, por ter mais familiaridade co
 
 ### Descrição
 O projeto se trata de uma API RESTFUL para um sistema de midia social, onde os usuários poderão:
-- [ ] Registrar e Autenticar
+- [x] Registrar e Autenticar
 - [ ] Criar, Editar e Deletar Postagem
 - [ ] Curtir Postagens
 - [ ] Seguir e Deixar de Seguir Outros Usuários
@@ -21,6 +21,18 @@ As Views e Models foram separados em vários arquivos nas suas respectivas pasta
 * Postgresql 16
 * Estrutura desenha no MySQL WorkBench
 ![Estrutura do Banco de Dados](./docs/estrutura_db.png)
+
+### Fake-migrate
+* No momento apaga o banco inteiro e sobe de novo
+
+Para iniciar o banco basta ir na pasta [src](./src/) e executar o comando
+```shell
+python3 migrate.py ["config.dev"]
+```
+O ultimo parametro é opcional e são aceitos:
+- "config.dev"
+- "config.prod"
+- "config.test"
 
 ---
 

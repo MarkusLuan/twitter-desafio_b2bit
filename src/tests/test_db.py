@@ -5,11 +5,11 @@ from models import User
 from repositories import UsersRepository
 import app_singleton
 
-app = create_app("config.test")
-
 class TestUserRepository:
     @classmethod
     def setup_class(cls):
+        app = create_app("config.test")
+        
         cls.app_context = app.app_context()
         cls.app_context.push()
         app_singleton.db.create_all()

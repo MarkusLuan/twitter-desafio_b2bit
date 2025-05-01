@@ -1,51 +1,78 @@
-from app import create_app
-
 import base64
+import datetime
 
-def test_not_found():
-    app = create_app("config.test")
+from app import create_app
+from models import User
+from repositories import UsersRepository
+import app_singleton
 
-    tester = app.test_client()
-    res = tester.get("/blabla")
+app = create_app("config.test")
 
-    assert res.status_code == 404
-    assert res.is_json is True
+class TestApi:
+    @classmethod
+    def setup_class(cls):
+        cls.tester = app.test_client()
+
+        cls.app_context = app.app_context()
+        cls.app_context.push()
+        app_singleton.db.create_all()
+
+        cls.URL_AUTH = "/api/auth/token"
+
+    def test_not_found(self):
+        res = self.tester.get("/blabla")
+
+        assert res.status_code == 404
+        assert res.is_json is True
+        
+        j = res.json or {}
+
+        assert j["erro"] is True
+        assert j["texto"] == "Recurso não encontrado!"
     
-    j = res.json or {}
+    def test_method_not_allowed(self):
+        res = self.tester.get(self.URL_AUTH)
+        
+        assert res.status_code == 405
+        assert res.is_json is True
+        
+        j = res.json or {}
+        assert j["erro"] is True
 
-    assert j["erro"] is True
-    assert j["texto"] == "Recurso não encontrado!"
+    def test_basic_auth(self):
+        res = self.tester.post(self.URL_AUTH)
+        j = res.json or {}
 
-def test_basic_auth():
-    app = create_app("config.test")
-    url = "/api/auth/token"
+        assert res.status_code == 401
+    
+    def test_oath_token(self):
+        def autenticar ():
+            basic_token_user = app.config["BASIC_AUTH_USERNAME"]
+            basic_token_pass = app.config["BASIC_AUTH_PASSWORD"]
+            basic_token = f"{basic_token_user}:{basic_token_pass}".encode("utf-8")
+            basic_token = str(base64.b64encode(basic_token), "utf-8")
 
-    tester = app.test_client()
-    res = tester.get(url)
+            res = self.tester.post(self.URL_AUTH, headers = {
+                "Authorization": f"Basic {basic_token}"
+            }, json={
+                "username": "user.teste",
+                "senha": "1234"
+            })
 
-    assert res.status_code == 405
+            return res
+        
+        res = autenticar()
+        assert res.status_code == 401
 
-    res = tester.post(url)
-    j = res.json or {}
+        UsersRepository().insert(User(**{
+            "id": 0,
+            "dt_nascimento": datetime.date.today(),
+            "nome": 'Usuário de Teste',
+            "nick": 'user.teste',
+            "email": 'teste@mail.com',
+            "senha": '1234',
+            "bio": 'testando'
+        }))
 
-    # TODO: Reativar após finalizar o banco e o oauth
-    return
-
-    assert res.status_code in [400, 401, 500]
-    assert j["erro"]
-    assert j["texto"] == "'BASIC_AUTH_REALM'"
-
-    basic_token_user = app.config["BASIC_AUTH_USERNAME"]
-    basic_token_pass = app.config["BASIC_AUTH_PASSWORD"]
-    basic_token = f"{basic_token_user}:{basic_token_pass}".encode("utf-8")
-    basic_token = str(base64.b64encode(basic_token), "utf-8")
-
-    res = tester.post(url, headers = {
-        "Authorization": f"Basic {basic_token}"
-    }, json={
-        "user": "teste",
-        "password": "1234"
-    })
-    j = res.json or {}
-
-    assert res.status_code == 200
+        res = autenticar()
+        assert res.status_code == 200
