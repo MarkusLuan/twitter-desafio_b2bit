@@ -7,10 +7,13 @@ class ErrorHandler:
         def __reportar_erro(erro: str, status_code: int):
             print(erro)
 
-            return make_response({
+            res = make_response({
                 "erro": True,
                 "texto": str(erro)
             }, status_code)
+
+            res.headers["Content-Type"] = "application/json"
+            return res
         
         @app.errorhandler(401)
         def nao_autorizado(e):

@@ -2,50 +2,53 @@ from app import create_app
 
 import base64
 
-def test_not_found():
-    app = create_app("config.test")
+app = create_app("config.test")
 
-    tester = app.test_client()
-    res = tester.get("/blabla")
+class TestApi:
+    @classmethod
+    def setup_class(cls):
+        cls.tester = app.test_client()
 
-    assert res.status_code == 404
-    assert res.is_json is True
+        cls.URL_AUTH = "/api/auth/token"
+
+    def test_not_found(self):
+        res = self.tester.get("/blabla")
+
+        assert res.status_code == 404
+        assert res.is_json is True
+        
+        j = res.json or {}
+
+        assert j["erro"] is True
+        assert j["texto"] == "Recurso não encontrado!"
     
-    j = res.json or {}
+    def test_method_not_allowed(self):
+        res = self.tester.get(self.URL_AUTH)
+        
+        assert res.status_code == 405
+        assert res.is_json is True
+        
+        j = res.json or {}
+        assert j["erro"] is True
 
-    assert j["erro"] is True
-    assert j["texto"] == "Recurso não encontrado!"
+    def test_basic_auth(self):
+        res = self.tester.post(self.URL_AUTH)
+        j = res.json or {}
 
-def test_basic_auth():
-    app = create_app("config.test")
-    url = "/api/auth/token"
+        assert res.status_code == 401
+    
+    def test_oath_token(self):
+        basic_token_user = app.config["BASIC_AUTH_USERNAME"]
+        basic_token_pass = app.config["BASIC_AUTH_PASSWORD"]
+        basic_token = f"{basic_token_user}:{basic_token_pass}".encode("utf-8")
+        basic_token = str(base64.b64encode(basic_token), "utf-8")
 
-    tester = app.test_client()
-    res = tester.get(url)
+        res = self.tester.post(self.URL_AUTH, headers = {
+            "Authorization": f"Basic {basic_token}"
+        }, json={
+            "user": "teste",
+            "password": "1234"
+        })
+        j = res.json or {}
 
-    assert res.status_code == 405
-
-    res = tester.post(url)
-    j = res.json or {}
-
-    # TODO: Reativar após finalizar o banco e o oauth
-    return
-
-    assert res.status_code in [400, 401, 500]
-    assert j["erro"]
-    assert j["texto"] == "'BASIC_AUTH_REALM'"
-
-    basic_token_user = app.config["BASIC_AUTH_USERNAME"]
-    basic_token_pass = app.config["BASIC_AUTH_PASSWORD"]
-    basic_token = f"{basic_token_user}:{basic_token_pass}".encode("utf-8")
-    basic_token = str(base64.b64encode(basic_token), "utf-8")
-
-    res = tester.post(url, headers = {
-        "Authorization": f"Basic {basic_token}"
-    }, json={
-        "user": "teste",
-        "password": "1234"
-    })
-    j = res.json or {}
-
-    assert res.status_code == 200
+        assert res.status_code == 200
