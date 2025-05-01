@@ -2,6 +2,8 @@ from flask import Flask, request
 from flask import make_response
 from werkzeug.exceptions import HTTPException
 
+from exceptions import user_exceptions
+
 class ErrorHandler:
     def __init__(self, app: Flask):
         def __reportar_erro(erro: str, status_code: int):
@@ -30,6 +32,10 @@ class ErrorHandler:
         @app.errorhandler(HTTPException)
         def erro_http(e: HTTPException):
             return __reportar_erro(e.description or "", e.code)
+        
+        @app.errorhandler(user_exceptions.InvalidLoginException)
+        def erro_login_invalido(e: user_exceptions.InvalidLoginException):
+            return __reportar_erro(str(e), 401)
 
         @app.errorhandler(Exception)
         def erro_tratado(e: Exception):
