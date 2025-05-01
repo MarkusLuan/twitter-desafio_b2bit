@@ -10,7 +10,12 @@ def create_app(config: str):
 
     if "DATABASE" in _app.config:
         db_config = _app.config["DATABASE"]
-        db_uri = "{ENGINE}://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
+        db_uri_str = "{ENGINE}://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}"
+
+        if db_config["ENGINE"] == "sqlite":
+            db_uri_str = "{ENGINE}:///{NAME}"
+
+        db_uri = db_uri_str.format(
             **db_config
         )
         

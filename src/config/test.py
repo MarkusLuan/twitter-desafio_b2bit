@@ -7,9 +7,7 @@ JWT_SECRET_KEY = f"{SECRET_KEY}.9vEq2RakI!4o$Ka8@1r#h"
 
 DATABASE =  {
     'ENGINE': 'sqlite',
-    'NAME': 'test.db',
-    'USER': 'root',
-    'PASSWORD': 'root'
+    'NAME': ':memory:'
 }
 
 DEBUG = False
