@@ -16,7 +16,8 @@
     - [x] Os usuários deverão ser capazes de se registrar usando email, nome e senha
     - [x] A autenticação para login e gerenciamento de sessão deverá ser com JWT
 - Caso 2: Postagens
-    - [ ] Os usuários logados podem postar com texto e uma imagem
+    - [x] Os usuários logados podem postar com texto
+    - [ ] Os usuários logados podem postar com uma imagem
     - [ ] As postagens podem ser curtidas por outros usuários
 - Caso 3: Seguidores
     - [ ] Os usuários logados podem Seguir ou Deixar de Seguir outros usuários
