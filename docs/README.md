@@ -18,7 +18,7 @@
 - Caso 2: Postagens
     - [x] Os usuários logados podem postar com texto
     - [ ] Os usuários logados podem postar com uma imagem
-    - [ ] As postagens podem ser curtidas por outros usuários
+    - [x] As postagens podem ser curtidas por outros usuários
 - Caso 3: Seguidores
     - [ ] Os usuários logados podem Seguir ou Deixar de Seguir outros usuários
     - [ ] O Feed deve mostrar apenas postagens dos usuários que a pessoa segue

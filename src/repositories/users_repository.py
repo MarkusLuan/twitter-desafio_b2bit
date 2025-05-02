@@ -10,7 +10,7 @@ import app_singleton
 class UsersRepository (AbstractRepository):
     def get_by_uuid(self, _uuid: UUID):
         user = User.query.filter(
-            User.uuid == _uuid
+            User.uuid == str(_uuid)
         ).first()
 
         if not user:
@@ -48,3 +48,9 @@ class UsersRepository (AbstractRepository):
             raise user_exceptions.UserAlreadyRegisteredException()
 
         return super().insert(_entity)
+    
+    def update(self, _entity):
+        ...
+
+    def delete(self, _entity):
+        ...
