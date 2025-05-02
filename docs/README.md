@@ -27,7 +27,7 @@
     - [ ] As postagens devem ser ordernadas pela data de criação, do mais recente ao mais antigo
 
 ### Bonus - Provavelmente não consiga concluir a tempo
-- [ ] Criar o Front-end em React.js
+- [x] Criar o Front-end em React.js
 - [ ] Limitador de banda nos endpoints para evitar abuso
 - [ ] Recursos de segurança para evitar SQL Injection e para garantir a Validação dos Dados
 - [ ] Tarefas async com Celery ou outra ferramenta

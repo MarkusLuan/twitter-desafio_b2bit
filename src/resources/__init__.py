@@ -16,4 +16,4 @@ def before_request():
     if request.endpoint in ["users.users"] and request.method == "POST":
         return
     
-    jwt.verify_jwt_in_request()
+    jwt.verify_jwt_in_request(False)

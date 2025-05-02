@@ -6,7 +6,7 @@ from .abstract_model import AbstractModel
 from app_singleton import db
 
 class Feed (AbstractModel):
-    fields = ["texto", "count_likes"]
+    fields = ["texto", "count_likes", "is_liked"]
 
     dt_remocao = db.Column(DateTime, nullable=True)
     texto = db.Column(db.String, nullable=False)
@@ -14,6 +14,8 @@ class Feed (AbstractModel):
     user_id = db.Column(BigInteger, ForeignKey("user.id"), nullable=False)
 
     user = db.relationship("User")
+
+    is_liked = False
 
     @property
     def img_path(self):
