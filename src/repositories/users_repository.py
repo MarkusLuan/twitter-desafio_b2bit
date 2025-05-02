@@ -16,7 +16,6 @@ class UsersRepository (AbstractRepository):
         if not user:
             raise user_exceptions.UserNotFoundException()
 
-        user.senha = None
         return user
     
     def search_by_nick_ou_nome(self, search: str):
