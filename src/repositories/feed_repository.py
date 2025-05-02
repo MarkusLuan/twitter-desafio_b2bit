@@ -1,8 +1,9 @@
 from .abstract_repository import AbstractRepository
+from sqlalchemy import or_, Join
 
 from uuid import UUID
 
-from models import Feed
+from models import Feed, Followers, User
 from exceptions import feed_exceptions
 
 class FeedRepository (AbstractRepository):
@@ -17,8 +18,14 @@ class FeedRepository (AbstractRepository):
         return feed
     
     def get_by_user(self, _user_uuid: UUID):
-        feeds = Feed.query.filter(
-            Feed.user.uuid == _user_uuid
-        ).order_by(Feed.dt_criacao).all()
+        feeds = Feed.query.join(
+                User,
+                Feed.user_id == User.id
+            ).outerjoin(
+            Followers, 
+            Feed.user_id == Followers.seguidor_id
+            ).filter(
+                User.uuid == _user_uuid
+            ).order_by(Feed.dt_criacao).all()
 
         return feeds

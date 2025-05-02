@@ -16,7 +16,10 @@ class Feed (Rest.Resource):
     def get(self):
         "Endpoint para carregar o feed do usuário logado"
 
-        return jsonify({})
+        uuid_user = jwt.get_jwt_identity()
+        feeds = self.__repository.get_by_user(uuid_user)
+
+        return jsonify([ feed.json for feed in feeds])
     
     def post(self):
         "Endpoint para criar uma postagem"
