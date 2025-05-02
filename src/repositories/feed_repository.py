@@ -9,7 +9,8 @@ from exceptions import feed_exceptions
 class FeedRepository (AbstractRepository):
     def get_by_uuid(self, _uuid: UUID) -> Feed:
         feed = Feed.query.filter(
-            Feed.uuid == str(_uuid)
+            Feed.uuid == str(_uuid),
+            Feed.dt_remocao.is_(None)
         ).first()
 
         if not feed:
@@ -49,7 +50,8 @@ class FeedRepository (AbstractRepository):
                     Likes.user_id == Feed.user_id
                 )
             ).filter(
-                User.uuid == str(_user_uuid)
+                User.uuid == str(_user_uuid),
+                Feed.dt_remocao.is_(None)
             ).order_by(desc(
                 Feed.dt_criacao
             )).all()

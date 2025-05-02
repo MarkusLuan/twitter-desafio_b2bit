@@ -1,3 +1,4 @@
+import datetime
 from flask import request, jsonify, abort
 
 import uuid
@@ -43,4 +44,13 @@ class Feed (AbstractRoutes):
     def delete(self, uuid_feed: uuid.UUID):
         "Endpoint para apagar uma postagem - Remoção lógica"
 
-        return jsonify({})
+        # Garantindo que apenas o usuario proprietário delete a postagem
+        feed = self.__repository.get_by_uuid(uuid_feed)
+        if feed.user != self.logged_user:
+            return abort(404)
+        
+        deleted_feed= feed.json
+        feed.dt_remocao = datetime.datetime.now()
+        self.__repository.update(feed)
+
+        return jsonify(deleted_feed)
