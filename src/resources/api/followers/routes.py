@@ -1,11 +1,11 @@
 from flask import request, jsonify, abort
-import flask_restful as Rest
 
 import uuid
 
+from ..abstract_routes import AbstractRoutes
 import app_singleton
 
-class Followers (Rest.Resource):
+class Followers (AbstractRoutes):
     def get(self):
         "Endpoint para listar seguidores do usuário logado"
 

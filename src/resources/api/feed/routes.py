@@ -1,24 +1,20 @@
 from flask import request, jsonify, abort
-import flask_restful as Rest
-import flask_jwt_extended as jwt
 
 import uuid
 
 from models import Feed as FeedModel
-from repositories import FeedRepository, UsersRepository
+from repositories import FeedRepository
 import utils
+from ..abstract_routes import AbstractRoutes
 import app_singleton
 
-class Feed (Rest.Resource):
+class Feed (AbstractRoutes):
     __repository = FeedRepository()
-    __users_repository = UsersRepository()
 
     def get(self):
         "Endpoint para carregar o feed do usuário logado"
 
-        uuid_user = jwt.get_jwt_identity()
-        feeds = self.__repository.get_by_user(uuid_user)
-
+        feeds = self.__repository.get_by_user_uuid(self.logged_user_uuid)
         return jsonify([ feed.json for feed in feeds])
     
     def post(self):
@@ -27,8 +23,7 @@ class Feed (Rest.Resource):
         if not request.is_json:
             return abort(400)
         
-        uuid_user = jwt.get_jwt_identity()
-        user = self.__users_repository.get_by_uuid(uuid_user)
+        user = self.logged_user
         
         j = request.json or {}
         utils.validar_campos_obrigatorios(j, [

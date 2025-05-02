@@ -17,7 +17,7 @@ class FeedRepository (AbstractRepository):
 
         return feed
     
-    def get_by_user(self, _user_uuid: UUID):
+    def get_by_user_uuid(self, _user_uuid: UUID):
         feeds = Feed.query.join(
                 User,
                 Feed.user_id == User.id

@@ -6,9 +6,10 @@ import uuid
 from repositories import UsersRepository
 from models import User as UserModel
 import utils
+from ..abstract_routes import AbstractRoutes
 import app_singleton
 
-class Users (Rest.Resource):
+class Users (AbstractRoutes):
     __repository = UsersRepository()
 
     def get(self):
@@ -36,7 +37,6 @@ class Users (Rest.Resource):
         utils.remover_campos(j, ["id", "uuid", "dt_criacao"])
         
         user = self.__repository.insert(UserModel(**j))
-
         return jsonify(user.json)
 
 class UserInfo (Rest.Resource):
