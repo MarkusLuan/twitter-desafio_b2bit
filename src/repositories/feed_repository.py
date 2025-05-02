@@ -1,5 +1,5 @@
 from .abstract_repository import AbstractRepository
-from sqlalchemy import and_
+from sqlalchemy import desc, and_
 
 from uuid import UUID
 
@@ -50,7 +50,9 @@ class FeedRepository (AbstractRepository):
                 )
             ).filter(
                 User.uuid == str(_user_uuid)
-            ).order_by(Feed.dt_criacao).all()
+            ).order_by(desc(
+                Feed.dt_criacao
+            )).all()
         
         feeds = []
         for feed, is_liked in res:
