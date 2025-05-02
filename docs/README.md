@@ -24,7 +24,7 @@
     - [ ] O Feed deve mostrar apenas postagens dos usuários que a pessoa segue
 - Caso 4: Feed
     - [ ] O usuário pode visualizar uma lista de postagens dos usuários que segue de forma paginada
-    - [ ] As postagens devem ser ordernadas pela data de criação, do mais recente ao mais antigo
+    - [x] As postagens devem ser ordernadas pela data de criação, do mais recente ao mais antigo
 
 ### Bonus - Provavelmente não consiga concluir a tempo
 - [x] Criar o Front-end em React.js
