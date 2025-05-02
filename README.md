@@ -101,3 +101,8 @@ pytest
     - [dev.py](./src/config/dev.py) - Profile para desenvolvimento e Docker
     - [test.py](./src/config/test.py) - Profile para testes unitários
     - [prod.py](./src/config/prod.py) - Profile para produção
+
+### Frontend
+* Feito com React.JS e VITE
+* Nunca tinha mexido com React.JS, mas consegui aprender bastante coisa no dia 01/02/2025 (Feriado)
+* Link no [github](https://github.com/MarkusLuan/twitter-desafio_b2bit-front)
