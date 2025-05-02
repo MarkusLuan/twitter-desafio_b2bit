@@ -13,7 +13,7 @@ def before_request():
     if request.endpoint in ["resources.api.auth.get_token"]:
         return
     
-    if request.endpoint in ["resources.api.auth.get_token"]:
+    if request.endpoint in ["users.users"] and request.method == "POST":
         return
     
     jwt.verify_jwt_in_request()
