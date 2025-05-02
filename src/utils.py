@@ -49,6 +49,12 @@ def validar_campos_obrigatorios(j: dict, campos_obrigatorios: list):
 def remover_campos(j: dict, campos: list):
     "Função para remover campos de um json"
 
+    campos.extend([
+        "id",
+        "uuid",
+        "dt_criacao"
+    ])
+
     for campo in campos:
         if campo in j:
             del j[campo]
