@@ -7,9 +7,9 @@ O projeto irei fazer utilizando o framework Flask, por ter mais familiaridade co
 ### Descrição
 O projeto se trata de uma API RESTFUL para um sistema de midia social, onde os usuários poderão:
 - [x] Registrar e Autenticar
-- [ ] Postagens
+- [x] Postagens
     - [x] Criar
-    - [ ] Editar
+    - [x] Editar
     - [x] Deletar
 - [x] Curtir e Descurtir Postagens
 - [ ] Seguir e Deixar de Seguir Outros Usuários
