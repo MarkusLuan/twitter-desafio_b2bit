@@ -1,0 +1,1 @@
+FEED_IMG_PATH = "./"

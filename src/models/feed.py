@@ -4,6 +4,7 @@ import os
 import base64
 
 from .abstract_model import AbstractModel
+import constantes
 from app_singleton import db
 
 class Feed (AbstractModel):
@@ -20,7 +21,7 @@ class Feed (AbstractModel):
 
     @property
     def img_path(self):
-        return f"feed_img/{self.uuid}.png"
+        return f"{constantes.FEED_IMG_PATH}/{self.uuid}.png"
     
     @property
     def has_image(self):
