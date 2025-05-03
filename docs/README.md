@@ -17,7 +17,7 @@
     - [x] A autenticação para login e gerenciamento de sessão deverá ser com JWT
 - Caso 2: Postagens
     - [x] Os usuários logados podem postar com texto
-    - [ ] Os usuários logados podem postar com uma imagem
+    - [x] Os usuários logados podem postar com uma imagem
     - [x] As postagens podem ser curtidas por outros usuários
 - Caso 3: Seguidores
     - [x] Os usuários logados podem Seguir ou Deixar de Seguir outros usuários
