@@ -46,3 +46,11 @@ def get_token():
 def refresh_token():
     identity = jwt.get_jwt_identity()
     return jsonify(gerar_token(identity))
+
+@resources.route("/info")
+@jwt.jwt_required()
+def get_user_info():
+    identity = jwt.get_jwt_identity()
+    user = repository.get_by_uuid(identity)
+    return jsonify(user.json)
+    
