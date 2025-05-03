@@ -34,7 +34,7 @@ class FeedRepository (AbstractRepository):
             _user_uuid
         )
 
-        res = db_session.query(
+        query = db_session.query(
             Feed,
             subq_is_liked_by_user.label("is_liked")
         ).outerjoin(
@@ -51,7 +51,10 @@ class FeedRepository (AbstractRepository):
             Feed.dt_remocao.is_(None)
         ).order_by(desc(
             Feed.dt_criacao
-        )).all()
+        ))
+
+        query = self.paginate(query)
+        res = query.all()
         
         feeds = []
         for feed, is_liked in res:
