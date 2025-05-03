@@ -92,3 +92,16 @@ class Feed (AbstractRoutes):
         self.__repository.update(feed)
 
         return jsonify(deleted_feed)
+    
+class FeedImg (AbstractRoutes):
+    __repository = FeedRepository()
+
+    def get(self, uuid_feed: uuid.UUID):
+        "Endpoint para carregar imagem do feed"
+
+        # Obtem informações do post
+        feed = self.__repository.get_by_uuid(uuid_feed)
+        if not feed.has_image:
+            return abort(404)
+
+        return feed.img_src

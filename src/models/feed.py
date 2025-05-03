@@ -8,7 +8,7 @@ import constantes
 from app_singleton import db
 
 class Feed (AbstractModel):
-    fields = ["texto", "count_likes", "is_liked", "img_src"]
+    fields = ["texto", "count_likes", "is_liked", "has_image"]
 
     dt_remocao = db.Column(DateTime, nullable=True)
     texto = db.Column(db.String, nullable=False)
@@ -32,7 +32,8 @@ class Feed (AbstractModel):
         blob = None
         if self.has_image:
             with open(self.img_path, "rb") as f:
-                blob = base64.b64encode(f.read()).decode("utf-8")
+                blob = "data:image/*;base64,"
+                blob += base64.b64encode(f.read()).decode("utf-8")
         return blob
     
     @property
