@@ -38,5 +38,5 @@ class TestUserRepository:
         res = self.repository.search_by_nick_ou_nome("Fulano")
         assert len(res) == 1
 
-        # with pytest.raises(user_exceptions.UserAlreadyRegisteredException):
-        #     cadastrar_usuario()
+        with pytest.raises(user_exceptions.UserAlreadyRegisteredException):
+            cadastrar_usuario()
