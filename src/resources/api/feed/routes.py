@@ -73,7 +73,7 @@ class Feed (AbstractRoutes):
         
         feed.texto = j["texto"]
         if "img" in request.files:
-            self.__salvar_img(uuid_feed, request.files["file"])
+            self.__salvar_img(uuid_feed, request.files["img"])
 
         self.__repository.update(feed)
 
