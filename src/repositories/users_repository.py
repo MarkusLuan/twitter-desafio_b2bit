@@ -18,6 +18,16 @@ class UsersRepository (AbstractRepository):
 
         return user
     
+    def get_by_nick(self, nick: str):
+        user = User.query.filter(
+            User.nick == nick
+        ).first()
+
+        if not user:
+            raise user_exceptions.UserNotFoundException()
+
+        return user
+    
     def search_by_nick_ou_nome(self, search: str):
         users = User.query.filter(or_(
             User.nick.like(f'%{search}%'),
@@ -50,7 +60,15 @@ class UsersRepository (AbstractRepository):
         return super().insert(_entity)
     
     def update(self, _entity):
-        ...
+        db = self.db_session
+        User.query.filter(User.id == _entity.id).update({
+            User.bio: _entity.bio,
+            User.count_seguidores : _entity.count_seguidores,
+            User.count_seguindo : _entity.count_seguindo
+        })
+        db.commit()
+
+        return _entity
 
     def delete(self, _entity):
         ...

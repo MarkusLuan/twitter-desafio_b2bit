@@ -20,8 +20,8 @@
     - [ ] Os usuários logados podem postar com uma imagem
     - [x] As postagens podem ser curtidas por outros usuários
 - Caso 3: Seguidores
-    - [ ] Os usuários logados podem Seguir ou Deixar de Seguir outros usuários
-    - [ ] O Feed deve mostrar apenas postagens dos usuários que a pessoa segue
+    - [x] Os usuários logados podem Seguir ou Deixar de Seguir outros usuários
+    - [x] O Feed deve mostrar apenas postagens dos usuários que a pessoa segue
 - Caso 4: Feed
     - [ ] O usuário pode visualizar uma lista de postagens dos usuários que segue de forma paginada
     - [x] As postagens devem ser ordernadas pela data de criação, do mais recente ao mais antigo
