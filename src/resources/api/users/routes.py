@@ -4,12 +4,14 @@ import flask_restful as Rest
 import uuid
 
 from repositories import UsersRepository
-from models import User
+from models import User as UserModel
+import utils
+from ..abstract_routes import AbstractRoutes
 import app_singleton
 
-repository = UsersRepository()
+class Users (AbstractRoutes):
+    __repository = UsersRepository()
 
-class Users (Rest.Resource):
     def get(self):
         "Endpoint para pesquisar por usuario"
 
@@ -24,8 +26,17 @@ class Users (Rest.Resource):
             return abort(400)
         
         j = request.json or {}
-        user = repository.insert(User(**j))
-
+        utils.validar_campos_obrigatorios(j, [
+            "dt_nascimento",
+            "nick",
+            "nome",
+            "email",
+            "bio",
+            "senha",
+        ])
+        utils.remover_campos(j, ["id", "uuid", "dt_criacao"])
+        
+        user = self.__repository.insert(UserModel(**j))
         return jsonify(user.json)
 
 class UserInfo (Rest.Resource):

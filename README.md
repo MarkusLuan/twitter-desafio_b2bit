@@ -7,10 +7,14 @@ O projeto irei fazer utilizando o framework Flask, por ter mais familiaridade co
 ### Descrição
 O projeto se trata de uma API RESTFUL para um sistema de midia social, onde os usuários poderão:
 - [x] Registrar e Autenticar
-- [ ] Criar, Editar e Deletar Postagem
-- [ ] Curtir Postagens
+- [x] Postagens
+    - [x] Criar
+    - [x] Editar
+    - [x] Deletar
+- [x] Curtir e Descurtir Postagens
 - [ ] Seguir e Deixar de Seguir Outros Usuários
-- [ ] Visualizar o Feed
+- [x] Visualizar o Feed
+    - [ ] (paginação)
 - [ ] Mostrar apenas postagens dos usuários seguidos
 
 As Views e Models foram separados em vários arquivos nas suas respectivas pastas para garantir um código mais limpo.
@@ -97,3 +101,8 @@ pytest
     - [dev.py](./src/config/dev.py) - Profile para desenvolvimento e Docker
     - [test.py](./src/config/test.py) - Profile para testes unitários
     - [prod.py](./src/config/prod.py) - Profile para produção
+
+### Frontend
+* Feito com React.JS e VITE
+* Nunca tinha mexido com React.JS, mas consegui aprender bastante coisa no dia 01/02/2025 (Feriado)
+* Link no [github](https://github.com/MarkusLuan/twitter-desafio_b2bit-front)

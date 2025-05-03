@@ -5,3 +5,7 @@ class InvalidLoginException (Exception):
 class UserNotFoundException (Exception):
     def __init__(self):
         super().__init__("Usuário não encontrado!")
+
+class UserAlreadyRegisteredException (Exception):
+    def __init__(self):
+        super().__init__("Usuário já cadatrado!")
