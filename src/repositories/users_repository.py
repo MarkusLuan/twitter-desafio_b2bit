@@ -28,12 +28,18 @@ class UsersRepository (AbstractRepository):
 
         return user
     
-    def search_by_nick_ou_nome(self, search: str):
-        users = User.query.filter(or_(
-            User.nick.like(f'%{search}%'),
-            User.nome.like(f"%{search}%")
-        )).all()
+    def search_by_nick_ou_nome(self, search: str, first_result=0, max_results=0):
+        query = User.query.filter(or_(
+            User.nick.ilike(f'%{search.lower()}%'),
+            User.nome.ilike(f"%{search.lower()}%")
+        ))
 
+        query = query.offset(first_result)
+        if max_results > 0:
+            query = query.limit(max_results)
+            print(max_results)
+        
+        users = query.all()
         return [user.json for user in users]
     
     def fazer_login(self, usuario: str, senha: str):

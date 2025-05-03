@@ -31,5 +31,5 @@
 - [ ] Limitador de banda nos endpoints para evitar abuso
 - [ ] Recursos de segurança para evitar SQL Injection e para garantir a Validação dos Dados
 - [ ] Tarefas async com Celery ou outra ferramenta
-- [ ] Sistema de busca
+- [x] Sistema de busca
 - [x] Continuos Integration (Github Actions para testes)
