@@ -58,3 +58,12 @@ def remover_campos(j: dict, campos: list):
     for campo in campos:
         if campo in j:
             del j[campo]
+
+def ts_to_date(ts: int):
+    """ Função para converter timestamp em datetime """
+
+    ts = int(ts)
+    return datetime.datetime.fromtimestamp(
+        ts,
+        datetime.timezone.utc
+    )

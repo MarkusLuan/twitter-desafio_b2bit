@@ -5,6 +5,10 @@ from uuid import UUID
 from models import Likes, Feed, User
 
 class LikesRepository (AbstractRepository):
+    @property
+    def model(self):
+        return Likes
+
     def get_by_uuid(self, _uuid: UUID):
         like = Likes.query.filter(
             Likes.uuid == str(_uuid)

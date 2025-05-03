@@ -1,8 +1,7 @@
 from flask import request, jsonify, abort
-from werkzeug.exceptions import BadRequest
 
 from repositories import UsersRepository
-from models import User as UserModel
+from models import User as UserModel, Paginacao
 import utils
 from ..abstract_routes import AbstractRoutes
 import app_singleton
@@ -24,11 +23,8 @@ class Users (AbstractRoutes):
             "search"
         ])
         
-        users = self.__repository.search_by_nick_ou_nome(
-            j["search"],
-            first_result=int(j.get("first_result", 0)),
-            max_results=int(j.get("max_results", 0))
-        )
+        self.__repository.paginacao = Paginacao(**j)
+        users = self.__repository.search_by_nick_ou_nome(j["search"])
         return jsonify(users)
     
     @app_singleton.basic_auth.required

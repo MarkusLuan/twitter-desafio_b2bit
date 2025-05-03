@@ -1,5 +1,5 @@
 from .abstract_repository import AbstractRepository
-from sqlalchemy import desc, and_, or_
+from sqlalchemy import desc, or_
 
 from uuid import UUID
 
@@ -7,6 +7,10 @@ from models import Feed, Followers, User, Likes
 from exceptions import feed_exceptions
 
 class FeedRepository (AbstractRepository):
+    @property
+    def model(self):
+        return Feed
+
     def get_by_uuid(self, _uuid: UUID) -> Feed:
         feed = Feed.query.filter(
             Feed.uuid == str(_uuid),
@@ -34,7 +38,7 @@ class FeedRepository (AbstractRepository):
             _user_uuid
         )
 
-        res = db_session.query(
+        query = db_session.query(
             Feed,
             subq_is_liked_by_user.label("is_liked")
         ).outerjoin(
@@ -51,7 +55,10 @@ class FeedRepository (AbstractRepository):
             Feed.dt_remocao.is_(None)
         ).order_by(desc(
             Feed.dt_criacao
-        )).all()
+        ))
+
+        query = self.paginate(query)
+        res = query.all()
         
         feeds = []
         for feed, is_liked in res:

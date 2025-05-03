@@ -3,7 +3,7 @@ from flask import request, jsonify, abort
 
 import uuid
 
-from models import Feed as FeedModel
+from models import Feed as FeedModel, Paginacao
 from repositories import FeedRepository
 import utils
 from ..abstract_routes import AbstractRoutes
@@ -22,6 +22,7 @@ class Feed (AbstractRoutes):
                 return abort(404)
             return jsonify(feed.json)
 
+        self.__repository.paginacao = Paginacao(**request.args.to_dict())
         feeds = self.__repository.get_by_user_uuid(self.logged_user_uuid)
         return jsonify([ feed.json for feed in feeds])
     

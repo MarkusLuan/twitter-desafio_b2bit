@@ -5,9 +5,12 @@ from uuid import UUID
 
 from models import User
 from exceptions import user_exceptions
-import app_singleton
 
 class UsersRepository (AbstractRepository):
+    @property
+    def model(self):
+        return User
+
     def get_by_uuid(self, _uuid: UUID):
         user = User.query.filter(
             User.uuid == str(_uuid)
@@ -28,17 +31,13 @@ class UsersRepository (AbstractRepository):
 
         return user
     
-    def search_by_nick_ou_nome(self, search: str, first_result=0, max_results=0):
+    def search_by_nick_ou_nome(self, search: str):
         query = User.query.filter(or_(
             User.nick.ilike(f'%{search.lower()}%'),
             User.nome.ilike(f"%{search.lower()}%")
         ))
 
-        query = query.offset(first_result)
-        if max_results > 0:
-            query = query.limit(max_results)
-            print(max_results)
-        
+        query = self.paginate(query)
         users = query.all()
         return [user.json for user in users]
     

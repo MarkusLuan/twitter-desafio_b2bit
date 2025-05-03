@@ -1,5 +1,5 @@
 from .abstract_repository import AbstractRepository
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 
 from uuid import UUID
 
@@ -7,10 +7,22 @@ from models import Followers
 from exceptions import follower_exceptions
 
 class FollowersRepository (AbstractRepository):
+    @property
+    def model(self):
+        return Followers
+
     def get_by_uuid(self, _uuid: UUID):
         follower = Followers.query.filter(
             Followers.uuid == str(_uuid)
         ).first()
+
+        return follower
+    
+    def get_by_user_id(self, user_id: int):
+        follower = Followers.query.filter(or_(
+            Followers.seguidor_id == user_id,
+            Followers.seguindo_id == user_id,
+        )).all()
 
         return follower
     
