@@ -25,6 +25,20 @@ class FollowersRepository (AbstractRepository):
 
         return follower
     
+    def count_seguidores_by_user_id(self, user_id: int):
+        count_seguidores = Followers.query.filter(
+            Followers.seguindo_id == user_id
+        ).count()
+
+        return count_seguidores
+    
+    def count_seguindo_by_user_id(self, user_id: int):
+        count_seguindo = Followers.query.filter(
+            Followers.seguidor_id == user_id
+        ).count()
+
+        return count_seguindo
+
     def update(self, _entity):
         ...
 

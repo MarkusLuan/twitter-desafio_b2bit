@@ -60,7 +60,15 @@ class UsersRepository (AbstractRepository):
         return super().insert(_entity)
     
     def update(self, _entity):
-        ...
+        db = self.db_session
+        User.query.filter(User.id == _entity.id).update({
+            User.bio: _entity.bio,
+            User.count_seguidores : _entity.count_seguidores,
+            User.count_seguindo : _entity.count_seguindo
+        })
+        db.commit()
+
+        return _entity
 
     def delete(self, _entity):
         ...

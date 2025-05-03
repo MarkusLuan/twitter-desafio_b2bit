@@ -30,9 +30,8 @@ class Followers (AbstractRoutes):
             seguindo_id = user.id
         ))
 
-        # TODO: Implementar atualização de cache
-        user.count_seguidores = 0
-        logged_user.count_seguindo = 0
+        user.count_seguidores = self.__repository.count_seguidores_by_user_id(user.id)
+        logged_user.count_seguindo = self.__repository.count_seguindo_by_user_id(logged_user.id)
         self.__users_repository.update(user)
         self.__users_repository.update(logged_user)
 
@@ -50,9 +49,8 @@ class Followers (AbstractRoutes):
         deleted_follower = follower.json
         self.__repository.delete(follower)
 
-        # TODO: Implementar atualização de cache
-        user.count_seguidores = 0
-        logged_user.count_seguindo = 0
+        user.count_seguidores = self.__repository.count_seguidores_by_user_id(user.id)
+        logged_user.count_seguindo = self.__repository.count_seguindo_by_user_id(logged_user.id)
         self.__users_repository.update(user)
         self.__users_repository.update(logged_user)
 
