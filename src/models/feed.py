@@ -1,12 +1,13 @@
 from sqlalchemy import DateTime, Integer, ForeignKey
 
 import os
+import base64
 
 from .abstract_model import AbstractModel
 from app_singleton import db
 
 class Feed (AbstractModel):
-    fields = ["texto", "count_likes", "is_liked"]
+    fields = ["texto", "count_likes", "is_liked", "img_src"]
 
     dt_remocao = db.Column(DateTime, nullable=True)
     texto = db.Column(db.String, nullable=False)
@@ -24,6 +25,14 @@ class Feed (AbstractModel):
     @property
     def has_image(self):
         return os.path.isfile(self.img_path)
+    
+    @property
+    def img_src(self):
+        blob = None
+        if self.has_image:
+            with open(self.img_path, "rb") as f:
+                blob = base64.b64encode(f.read())
+        return blob
     
     @property
     def json(self):
