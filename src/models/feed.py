@@ -32,7 +32,7 @@ class Feed (AbstractModel):
         blob = None
         if self.has_image:
             with open(self.img_path, "rb") as f:
-                blob = base64.b64encode(f.read())
+                blob = base64.b64encode(f.read()).decode("utf-8")
         return blob
     
     @property

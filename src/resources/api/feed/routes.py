@@ -1,8 +1,9 @@
-import datetime
-import os
 from flask import request, jsonify, abort
+from werkzeug.datastructures.file_storage import FileStorage
 
+import os
 import uuid
+import datetime
 
 from models import Feed as FeedModel, Paginacao
 from repositories import FeedRepository
@@ -13,7 +14,7 @@ import constantes
 class Feed (AbstractRoutes):
     __repository = FeedRepository()
 
-    def __salvar_img(self, uuid_feed: uuid.UUID, file):
+    def __salvar_img(self, uuid_feed: uuid.UUID, file: FileStorage):
         if not os.path.isdir(constantes.FEED_IMG_PATH):
             os.mkdir(constantes.FEED_IMG_PATH)
         
@@ -35,13 +36,9 @@ class Feed (AbstractRoutes):
     
     def post(self):
         "Endpoint para criar uma postagem"
-        # Garantir que seja passado um JSON
-        if not request.is_json:
-            return abort(400)
-        
         user = self.logged_user
         
-        j = request.json or {}
+        j = request.get_json() if request.is_json else request.form.to_dict()
         utils.validar_campos_obrigatorios(j, [
             "texto"
         ])
@@ -54,8 +51,9 @@ class Feed (AbstractRoutes):
         j["user_id"] = user.id
 
         feed = FeedModel(**j)
+        feed.uuid = uuid.uuid4()
         if "img" in request.files:
-            self.__salvar_img(feed.uuid, request.files["file"])
+            self.__salvar_img(feed.uuid, request.files["img"])
 
         feed = self.__repository.insert(feed)
         return jsonify(feed.json)
@@ -63,11 +61,7 @@ class Feed (AbstractRoutes):
     def put(self, uuid_feed: uuid.UUID):
         "Endpoint para editar uma postagem"
 
-        # Garantir que seja passado um JSON
-        if not request.is_json:
-            return abort(400)
-        
-        j = request.json or {}
+        j = request.get_json() if request.is_json else request.form.to_dict()
         utils.validar_campos_obrigatorios(j, [
             "texto"
         ])
