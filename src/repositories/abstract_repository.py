@@ -6,6 +6,7 @@ import uuid
 
 from models import Paginacao
 from models.abstract_model import AbstractModel
+import utils
 import app_singleton
 
 class AbstractRepository (ABC):
@@ -41,24 +42,24 @@ class AbstractRepository (ABC):
 
     def paginate(self, query: Query):
         """ Função reservada para fazer a paginação """
-
-        query = query.offset(self.paginacao.first_result)
-        if self.paginacao.max_results > 0:
-            query = query.limit(self.paginacao.max_results)
         
         if self.paginacao.ts_after > 0:
             if self.paginacao.ts_before > 0:
                 query = query.filter(
                     between(
                         self.model.dt_criacao,
-                        self.paginacao.ts_after,
-                        self.paginacao.ts_before
+                        utils.ts_to_date(self.paginacao.ts_after),
+                        utils.ts_to_date(self.paginacao.ts_before)
                     )
                 )
             else:
-                query = query.filter(self.model.dt_criacao > self.paginacao.ts_after)
-        else:
-            query = query.filter(self.model.dt_criacao < self.paginacao.ts_before)
+                query = query.filter(self.model.dt_criacao > utils.ts_to_date(self.paginacao.ts_after))
+        elif self.paginacao.ts_before > 0:
+            query = query.filter(self.model.dt_criacao < utils.ts_to_date(self.paginacao.ts_before))
+        
+        query = query.offset(self.paginacao.first_result)
+        if self.paginacao.max_results > 0:
+            query = query.limit(self.paginacao.max_results)
         
         self.paginacao = Paginacao()
         return query

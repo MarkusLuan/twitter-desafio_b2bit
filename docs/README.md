@@ -6,7 +6,7 @@
 - [x] Autenticação com JWT
 - [x] Banco de Dados de preferencia PostgreSQL
 - [x] Sistema de cache para sistema de likes e seguidores
-- [ ] Paginação
+- [x] Paginação
 - [x] Testes unitários
 - [ ] Documentação com Swagger ou Postman
 - [x] Docker com o Docker-compose
@@ -23,7 +23,7 @@
     - [x] Os usuários logados podem Seguir ou Deixar de Seguir outros usuários
     - [x] O Feed deve mostrar apenas postagens dos usuários que a pessoa segue
 - Caso 4: Feed
-    - [ ] O usuário pode visualizar uma lista de postagens dos usuários que segue de forma paginada
+    - [x] O usuário pode visualizar uma lista de postagens dos usuários que segue de forma paginada
     - [x] As postagens devem ser ordernadas pela data de criação, do mais recente ao mais antigo
 
 ### Bonus - Provavelmente não consiga concluir a tempo
