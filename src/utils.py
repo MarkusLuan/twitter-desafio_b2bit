@@ -64,6 +64,5 @@ def ts_to_date(ts: int):
 
     ts = int(ts)
     return datetime.datetime.fromtimestamp(
-        ts,
-        datetime.timezone.utc
+        ts
     )

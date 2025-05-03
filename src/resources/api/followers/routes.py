@@ -1,12 +1,9 @@
-from flask import request, jsonify, abort
-
-import uuid
+from flask import jsonify
 
 from ..abstract_routes import AbstractRoutes
 from repositories import FollowersRepository, UsersRepository
 from models import Followers as FollowersModel
 from exceptions import follower_exceptions
-import app_singleton
 
 class Followers (AbstractRoutes):
     __repository = FollowersRepository()
