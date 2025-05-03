@@ -15,7 +15,10 @@ class Followers (AbstractRoutes):
     def get(self):
         "Endpoint para listar seguidores do usuário logado"
 
-        return jsonify({})
+        logged_user = self.logged_user
+        followers = self.__repository.get_by_user_id(logged_user.id)
+
+        return jsonify([ follower.json for follower in followers ])
     
     def post(self, nick_user: str):
         "Endpoint para seguir um usuario"
