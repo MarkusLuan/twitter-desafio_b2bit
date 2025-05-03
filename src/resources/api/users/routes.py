@@ -1,7 +1,4 @@
 from flask import request, jsonify, abort
-import flask_restful as Rest
-
-import uuid
 
 from repositories import UsersRepository
 from models import User as UserModel
@@ -38,9 +35,3 @@ class Users (AbstractRoutes):
         
         user = self.__repository.insert(UserModel(**j))
         return jsonify(user.json)
-
-class UserInfo (Rest.Resource):
-    def get(self, uuid_user: uuid.UUID):
-        "Endpoint para mostrar informações do usuário"
-
-        return jsonify({})

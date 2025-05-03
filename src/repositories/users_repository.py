@@ -18,6 +18,16 @@ class UsersRepository (AbstractRepository):
 
         return user
     
+    def get_by_nick(self, nick: str):
+        user = User.query.filter(
+            User.nick == nick
+        ).first()
+
+        if not user:
+            raise user_exceptions.UserNotFoundException()
+
+        return user
+    
     def search_by_nick_ou_nome(self, search: str):
         users = User.query.filter(or_(
             User.nick.like(f'%{search}%'),
