@@ -1,5 +1,5 @@
 from .abstract_repository import AbstractRepository
-from sqlalchemy import desc, and_, or_
+from sqlalchemy import desc, or_
 
 from uuid import UUID
 
@@ -7,6 +7,10 @@ from models import Feed, Followers, User, Likes
 from exceptions import feed_exceptions
 
 class FeedRepository (AbstractRepository):
+    @property
+    def model(self):
+        return Feed
+
     def get_by_uuid(self, _uuid: UUID) -> Feed:
         feed = Feed.query.filter(
             Feed.uuid == str(_uuid),

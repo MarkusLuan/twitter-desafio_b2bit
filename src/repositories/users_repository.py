@@ -5,9 +5,12 @@ from uuid import UUID
 
 from models import User
 from exceptions import user_exceptions
-import app_singleton
 
 class UsersRepository (AbstractRepository):
+    @property
+    def model(self):
+        return User
+
     def get_by_uuid(self, _uuid: UUID):
         user = User.query.filter(
             User.uuid == str(_uuid)

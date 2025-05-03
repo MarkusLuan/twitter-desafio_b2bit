@@ -7,6 +7,10 @@ from models import Followers
 from exceptions import follower_exceptions
 
 class FollowersRepository (AbstractRepository):
+    @property
+    def model(self):
+        return Followers
+
     def get_by_uuid(self, _uuid: UUID):
         follower = Followers.query.filter(
             Followers.uuid == str(_uuid)

@@ -5,10 +5,16 @@ from abc import ABC, abstractmethod
 import uuid
 
 from models import Paginacao
+from models.abstract_model import AbstractModel
 import app_singleton
 
 class AbstractRepository (ABC):
     paginacao = Paginacao()
+    
+    @property
+    @abstractmethod
+    def model(self) -> AbstractModel:
+        ...
 
     @property
     def db_session(self):
@@ -44,19 +50,15 @@ class AbstractRepository (ABC):
             if self.paginacao.ts_before > 0:
                 query = query.filter(
                     between(
-                        "dt_criacao",
+                        self.model.dt_criacao,
                         self.paginacao.ts_after,
                         self.paginacao.ts_before
                     )
                 )
             else:
-                # TODO: Implementar paginação para after
-                # query = query.filter("dt_criacao > paginacao.ts_after")
-                ...
+                query = query.filter(self.model.dt_criacao > self.paginacao.ts_after)
         else:
-            # TODO: Implementar paginação para before
-            # query = query.filter("dt_criacao < paginacao.ts_before")
-            ...
+            query = query.filter(self.model.dt_criacao < self.paginacao.ts_before)
         
         self.paginacao = Paginacao()
         return query
