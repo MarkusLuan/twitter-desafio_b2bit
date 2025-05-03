@@ -1,4 +1,4 @@
-from sqlalchemy import DateTime, BigInteger, ForeignKey
+from sqlalchemy import DateTime, Integer, ForeignKey
 
 import os
 
@@ -11,7 +11,7 @@ class Feed (AbstractModel):
     dt_remocao = db.Column(DateTime, nullable=True)
     texto = db.Column(db.String, nullable=False)
     count_likes = db.Column(db.Integer, default=0, nullable=False)
-    user_id = db.Column(BigInteger, ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(Integer, ForeignKey("user.id"), nullable=False)
 
     user = db.relationship("User")
 
