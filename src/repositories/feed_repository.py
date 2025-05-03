@@ -1,5 +1,5 @@
 from .abstract_repository import AbstractRepository
-from sqlalchemy import desc, and_
+from sqlalchemy import desc, and_, or_
 
 from uuid import UUID
 
@@ -37,24 +37,21 @@ class FeedRepository (AbstractRepository):
         res = db_session.query(
             Feed,
             subq_is_liked_by_user.label("is_liked")
-        ).join(
-                User,
-                Feed.user_id == User.id
-            ).outerjoin(
+        ).outerjoin(
             Followers, 
-            Feed.user_id == Followers.seguidor_id
-            ).outerjoin(
-                Likes,
-                and_(
-                    Likes.feed_id == Feed.id,
-                    Likes.user_id == Feed.user_id
-                )
-            ).filter(
-                User.uuid == str(_user_uuid),
-                Feed.dt_remocao.is_(None)
-            ).order_by(desc(
-                Feed.dt_criacao
-            )).all()
+            Followers.seguindo_id == Feed.user_id
+        ).join(
+            User,
+            or_(
+                Feed.user_id == User.id,
+                Followers.seguidor_id == User.id
+            )
+        ).filter(
+            User.uuid == str(_user_uuid),
+            Feed.dt_remocao.is_(None)
+        ).order_by(desc(
+            Feed.dt_criacao
+        )).all()
         
         feeds = []
         for feed, is_liked in res:
