@@ -1,5 +1,4 @@
 from flask import request, jsonify, abort
-from werkzeug.datastructures.file_storage import FileStorage
 
 import os
 import uuid
@@ -14,7 +13,7 @@ import constantes
 class Feed (AbstractRoutes):
     __repository = FeedRepository()
 
-    def __salvar_img(self, uuid_feed: uuid.UUID, file: FileStorage):
+    def __salvar_img(self, uuid_feed: uuid.UUID, file):
         if not os.path.isdir(constantes.FEED_IMG_PATH):
             os.mkdir(constantes.FEED_IMG_PATH)
         
