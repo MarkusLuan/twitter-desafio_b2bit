@@ -10,7 +10,7 @@ resources.register_blueprint(api.resources)
 
 @resources.before_app_request
 def before_request():
-    if request.endpoint in ["resources.api.auth.get_token"]:
+    if request.endpoint in ["resources.api.auth.get_token", "resources.api.auth.refresh_token"]:
         return
     
     if request.endpoint in ["users.users"] and request.method == "POST":
