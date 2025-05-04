@@ -231,13 +231,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/users/teste",
+							"raw": "{{url}}/users/nick",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"teste"
+								"nick"
 							]
 						}
 					},
@@ -855,13 +855,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/followers/92426a14-5527-4639-9cc5-2f9abf609581",
+							"raw": "{{url}}/followers/nick",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"followers",
-								"92426a14-5527-4639-9cc5-2f9abf609581"
+								"nick"
 							]
 						}
 					},
@@ -889,13 +889,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/followers/92426a14-5527-4639-9cc5-2f9abf609581",
+							"raw": "{{url}}/followers/nick",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"followers",
-								"92426a14-5527-4639-9cc5-2f9abf609581"
+								"nick"
 							]
 						}
 					},
