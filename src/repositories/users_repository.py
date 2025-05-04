@@ -4,12 +4,20 @@ from sqlalchemy import or_
 from uuid import UUID
 
 from models import User
+import seguranca_utils
 from exceptions import user_exceptions
 
 class UsersRepository (AbstractRepository):
     @property
     def model(self):
         return User
+    
+    def __hash_senha(self, senha: str):
+        senha = seguranca_utils.fromBase64(senha)
+        
+        return seguranca_utils.hash(
+            senha
+        )
 
     def get_by_uuid(self, _uuid: UUID):
         user = User.query.filter(
@@ -47,7 +55,7 @@ class UsersRepository (AbstractRepository):
             User.email == usuario
         )).first()
 
-        if not user or user.senha != senha:
+        if not user or user.senha != self.__hash_senha(senha):
             raise user_exceptions.InvalidLoginException()
         
         user.senha = None
@@ -61,7 +69,8 @@ class UsersRepository (AbstractRepository):
 
         if user:
             raise user_exceptions.UserAlreadyRegisteredException()
-
+        
+        _entity.senha = self.__hash_senha(_entity.senha)
         return super().insert(_entity)
     
     def update(self, _entity):

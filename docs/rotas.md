@@ -31,7 +31,7 @@ Creditos ao repositorio no git que adiantou uma parte da documentação https://
 ```json
 {
 "username": "jisasas@dandsjnsad",
-"senha": "dajdna"
+"senha": "<BASE64_SENHA>"
 }
 ```
 
@@ -57,13 +57,7 @@ Creditos ao repositorio no git que adiantou uma parte da documentação https://
 }
 ```
 
-**Body - JSON**
-```json
-{
-"username": "jisasas@dandsjnsad",
-"senha": "dajdna"
-}
-```
+**Body - EMPTY**
 
 **Response - JSON**
 ```json
@@ -217,7 +211,7 @@ Creditos ao repositorio no git que adiantou uma parte da documentação https://
 "nome": "markus_lu",
 "email": "markus_lun@test.com",
 "bio": "teste",
-"senha": "1234"
+"senha": "<BASE64_SENHA>"
 }
 ```
 

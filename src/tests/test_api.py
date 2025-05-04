@@ -1,11 +1,5 @@
 import pytest
-import base64
-import datetime
-
-from app import create_app
-from models import User
-from repositories import UsersRepository
-import app_singleton
+import seguranca_utils
 
 class TestApi:
     @pytest.fixture(autouse=True)
@@ -17,11 +11,9 @@ class TestApi:
 
         basic_token_user = app_context.config["BASIC_AUTH_USERNAME"]
         basic_token_pass = app_context.config["BASIC_AUTH_PASSWORD"]
-        basic_token = f"{basic_token_user}:{basic_token_pass}".encode("utf-8")
-        basic_token = str(base64.b64encode(basic_token), "utf-8")
 
         self.URL_AUTH = "/api/auth/token"
-        self.basic_token = basic_token
+        self.basic_token = seguranca_utils.toBase64(f"{basic_token_user}:{basic_token_pass}")
     
     def teardown_method(self):
         self.ctx.pop()
@@ -43,14 +35,14 @@ class TestApi:
         assert res.status_code == 401
     
     def test_oath_token(self):        
-        res = self.autenticar("user.teste", "4321")
+        res = self.autenticar("user.teste", seguranca_utils.toBase64("4321"))
         assert res.status_code == 401
 
-        res = self.autenticar("user.teste", "1234")
+        res = self.autenticar("user.teste", seguranca_utils.toBase64("1234"))
         assert res.status_code == 200
 
     def test_not_found(self):
-        res = self.autenticar("user.teste", "1234")
+        res = self.autenticar("user.teste", seguranca_utils.toBase64("1234"))
         j = res.json
 
         res = self.tester.get("/blabla", headers = {
@@ -72,7 +64,7 @@ class TestApi:
         assert res.is_json is True
     
     def test_method_not_allowed(self):
-        res = self.autenticar("user.teste", "1234")
+        res = self.autenticar("user.teste", seguranca_utils.toBase64("1234"))
         j = res.json
 
         res = self.tester.get(self.URL_AUTH, headers = {
