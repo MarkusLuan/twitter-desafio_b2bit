@@ -178,7 +178,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NjMxMTU5MiwianRpIjoiMTBjNTU1MTAtNTY2OC00YTgwLWFjNjctNWVmZWU5NjQxNjU2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ijg1OTA5YWFlLTRlNzAtNDNkOS1iNWFkLTJkMTg5ZGRhMzk0MyIsIm5iZiI6MTc0NjMxMTU5MiwiY3NyZiI6ImQ3ZThiOTJkLWNhYjItNDk4OS1iMGZiLTViOWM2YTQ0ZjIwZiIsImV4cCI6MTc0NjMxNTE5Mn0.MtupMOthQfvL5vtIP8HMz13np5VBsS8faMe7NrKwCp8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NjMxNTYwNywianRpIjoiZDRmODFjOGUtZjE1Ni00Mzc1LWEzZDMtYjY3ZDVlZjRiZTJlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ijg1OTA5YWFlLTRlNzAtNDNkOS1iNWFkLTJkMTg5ZGRhMzk0MyIsIm5iZiI6MTc0NjMxNTYwNywiY3NyZiI6IjJjMmI2NTMxLTRiY2QtNGU4My04ZGYzLTNmMzNjMjM1ZTc2ZCIsImV4cCI6MTc0NjMxOTIwN30.MWzd6ybzc63nKlOoT4tErfg8sy7Cmyv_QAVTwvCmS3I",
 									"type": "string"
 								}
 							]
@@ -474,6 +474,96 @@
 					"response": []
 				},
 				{
+					"name": "Editar Postagem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NjMxMTU5MiwianRpIjoiMTBjNTU1MTAtNTY2OC00YTgwLWFjNjctNWVmZWU5NjQxNjU2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ijg1OTA5YWFlLTRlNzAtNDNkOS1iNWFkLTJkMTg5ZGRhMzk0MyIsIm5iZiI6MTc0NjMxMTU5MiwiY3NyZiI6ImQ3ZThiOTJkLWNhYjItNDk4OS1iMGZiLTViOWM2YTQ0ZjIwZiIsImV4cCI6MTc0NjMxNTE5Mn0.MtupMOthQfvL5vtIP8HMz13np5VBsS8faMe7NrKwCp8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWxhZGRpbjpvcGVuc2VzYW1l",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"texto\": \"olá, testando postagem\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/feed",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"feed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Postagem com Imagem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4NjE3NSwianRpIjoiZDgyOTQ3MmMtZjJiZi00ZjBiLTgwNjctYTA1ZjFhMjhhODU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJjM2Q3YTdlLTBmMDQtNDVmYi1hZDY1LWExMzI0ZGFlODJiOSIsIm5iZiI6MTcyOTk4NjE3NSwiY3NyZiI6IjljYzc3MDBmLTA4ZTktNDE5Yi05NTQ3LTlkOGRlZDg3YTM1NCIsImV4cCI6MTcyOTk4OTc3NX0.MX8xVywKFriMj2pS8f9FiZYasccSrZNccosG2huvOME",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWxhZGRpbjpvcGVuc2VzYW1l",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "texto",
+									"value": "testando post com imagem",
+									"type": "text"
+								},
+								{
+									"key": "imagem",
+									"type": "file",
+									"src": "/C:/Users/marku/Pictures/2018-01-18/001.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/feed",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"feed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Deletar Postagem",
 					"request": {
 						"auth": {
@@ -502,6 +592,96 @@
 							"path": [
 								"feed",
 								"2399f134-2d0c-46fe-aa01-9991dbd64e4a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Postagem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NjMxMTU5MiwianRpIjoiMTBjNTU1MTAtNTY2OC00YTgwLWFjNjctNWVmZWU5NjQxNjU2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ijg1OTA5YWFlLTRlNzAtNDNkOS1iNWFkLTJkMTg5ZGRhMzk0MyIsIm5iZiI6MTc0NjMxMTU5MiwiY3NyZiI6ImQ3ZThiOTJkLWNhYjItNDk4OS1iMGZiLTViOWM2YTQ0ZjIwZiIsImV4cCI6MTc0NjMxNTE5Mn0.MtupMOthQfvL5vtIP8HMz13np5VBsS8faMe7NrKwCp8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWxhZGRpbjpvcGVuc2VzYW1l",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"texto\": \"olá, testando postagem\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/feed",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"feed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Postagem com Imagem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4NjE3NSwianRpIjoiZDgyOTQ3MmMtZjJiZi00ZjBiLTgwNjctYTA1ZjFhMjhhODU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJjM2Q3YTdlLTBmMDQtNDVmYi1hZDY1LWExMzI0ZGFlODJiOSIsIm5iZiI6MTcyOTk4NjE3NSwiY3NyZiI6IjljYzc3MDBmLTA4ZTktNDE5Yi05NTQ3LTlkOGRlZDg3YTM1NCIsImV4cCI6MTcyOTk4OTc3NX0.MX8xVywKFriMj2pS8f9FiZYasccSrZNccosG2huvOME",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWxhZGRpbjpvcGVuc2VzYW1l",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "texto",
+									"value": "testando post com imagem",
+									"type": "text"
+								},
+								{
+									"key": "imagem",
+									"type": "file",
+									"src": "/C:/Users/marku/Pictures/2018-01-18/001.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/feed",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"feed"
 							]
 						}
 					},
