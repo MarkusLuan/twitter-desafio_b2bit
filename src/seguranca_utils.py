@@ -18,12 +18,12 @@ def fromBase64(texto: str):
         "utf-8"
     )
 
-def hash(texto: str, random: str):
+def hash(texto: str):
     """ Função para encriptar senhas """
 
     # Embaça o texto com outros caracteres antes de criptografar
-    texto = f"xoQxfTJ210I5EF.{texto}_{random}"
+    texto = f"xoQxfTJ210I{texto}_b2xhMT"
     buffer = texto.encode("utf-8")
-    _hash = hashlib.sha512(buffer, usedforsecurity=True)
+    _hash = hashlib.md5(buffer)
     
     return _hash.hexdigest()

@@ -12,14 +12,11 @@ class UsersRepository (AbstractRepository):
     def model(self):
         return User
     
-    @property
-    def __rand_hash(self):
-        return "N2ppx5x0kd"
-    
     def __hash_senha(self, senha: str):
+        senha = seguranca_utils.fromBase64(senha)
+        
         return seguranca_utils.hash(
-            seguranca_utils.fromBase64(senha),
-            self.__rand_hash
+            senha
         )
 
     def get_by_uuid(self, _uuid: UUID):

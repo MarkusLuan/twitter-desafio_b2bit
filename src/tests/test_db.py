@@ -5,6 +5,7 @@ from app import create_app
 from models import User
 from repositories import UsersRepository
 from exceptions import user_exceptions
+import seguranca_utils
 import app_singleton
 
 @pytest.mark.usefixtures("app_context")
@@ -27,7 +28,7 @@ class TestUserRepository:
                 nome = 'Fulano da Silva Sauro',
                 nick = 'fulano.risadinha',
                 email = 'fulaninho_123@gmail.com',
-                senha = '26012000',
+                senha = seguranca_utils.toBase64('26012000'),
                 bio = 'e aí bro',
                 count_seguidores = 2000,
                 count_seguindo = 4

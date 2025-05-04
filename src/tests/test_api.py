@@ -35,14 +35,14 @@ class TestApi:
         assert res.status_code == 401
     
     def test_oath_token(self):        
-        res = self.autenticar("user.teste", "4321")
+        res = self.autenticar("user.teste", seguranca_utils.toBase64("4321"))
         assert res.status_code == 401
 
-        res = self.autenticar("user.teste", "1234")
+        res = self.autenticar("user.teste", seguranca_utils.toBase64("1234"))
         assert res.status_code == 200
 
     def test_not_found(self):
-        res = self.autenticar("user.teste", "1234")
+        res = self.autenticar("user.teste", seguranca_utils.toBase64("1234"))
         j = res.json
 
         res = self.tester.get("/blabla", headers = {
@@ -64,7 +64,7 @@ class TestApi:
         assert res.is_json is True
     
     def test_method_not_allowed(self):
-        res = self.autenticar("user.teste", "1234")
+        res = self.autenticar("user.teste", seguranca_utils.toBase64("1234"))
         j = res.json
 
         res = self.tester.get(self.URL_AUTH, headers = {
