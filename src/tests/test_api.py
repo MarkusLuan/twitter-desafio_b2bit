@@ -1,11 +1,5 @@
 import pytest
-import base64
-import datetime
-
-from app import create_app
-from models import User
-from repositories import UsersRepository
-import app_singleton
+import seguranca_utils
 
 class TestApi:
     @pytest.fixture(autouse=True)
@@ -17,11 +11,9 @@ class TestApi:
 
         basic_token_user = app_context.config["BASIC_AUTH_USERNAME"]
         basic_token_pass = app_context.config["BASIC_AUTH_PASSWORD"]
-        basic_token = f"{basic_token_user}:{basic_token_pass}".encode("utf-8")
-        basic_token = str(base64.b64encode(basic_token), "utf-8")
 
         self.URL_AUTH = "/api/auth/token"
-        self.basic_token = basic_token
+        self.basic_token = seguranca_utils.toBase64(f"{basic_token_user}:{basic_token_pass}")
     
     def teardown_method(self):
         self.ctx.pop()
