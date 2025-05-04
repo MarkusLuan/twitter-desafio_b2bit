@@ -8,7 +8,9 @@
 - [x] Sistema de cache para sistema de likes e seguidores
 - [x] Paginação
 - [x] Testes unitários
-- [ ] Documentação com Swagger ou Postman
+- [x] Documentação com Swagger ou Postman
+    - [Postman.json](./postman.json)
+    - [Documentação das rotas](./rotas.md)
 - [x] Docker com o Docker-compose
 
 ### Casos de uso
